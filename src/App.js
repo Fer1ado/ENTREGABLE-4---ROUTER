@@ -54,8 +54,8 @@ app.use("/api/cart", cartRoute)
 
 // CART
 
-// POST http://localhost:8080/api/cart/ 
-// GET  http://localhost:8080/api/cart/:cartId
-// POST http://localhost:8080/api/cart/:cartId/product/:productId
+// POST http://localhost:8080/api/cart/ --> Crea un carrito nuevo
+// GET  http://localhost:8080/api/cart/:cartId --> Devuelve contenido de carrito según ID
+// POST http://localhost:8080/api/cart/:cartId/product/:productId --> Agrega productos al carrito de acuerdo al Id de carrito y producto a agregar.
 
 
