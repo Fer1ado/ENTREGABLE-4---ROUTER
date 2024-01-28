@@ -20,14 +20,14 @@ export default class CartManager {
   }
 
   async createCart() {
-     try{
+    try{
         const cart = new Cart()
         const parseCart = JSON.parse(await fs.readFile(cartRoute, "utf-8"))
         const remplazo = parseCart.concat(cart)
         await fs.writeFile(cartRoute, JSON.stringify(remplazo))
         return{status: "success", message: "NUEVO CARRITO DE COMPRAS CREADO", carrito: cart}}
-     catch(error){
-        return(error, "algo salio mal")
+    catch(err){
+        return{status: "failed", message: err.message}
     }
     }
 
@@ -40,7 +40,7 @@ export default class CartManager {
     const parseCart = JSON.parse(await fs.readFile(cartRoute, "utf-8"));
     const parseProduct = JSON.parse(await fs.readFile(productsRoute, "utf-8"))
 
-
+  try{
     if ( added === null) {
         console.log("producto inexistente")
       return {status: "failed", message: "NECESITA CREAR UN CARRITO EN TIENDA PARA PODER COMPRAR"}}
@@ -57,15 +57,12 @@ export default class CartManager {
         const remplazo = nuevoJson.concat(nuevoitem);
         await fs.writeFile(cartRoute, JSON.stringify(remplazo));
         console.log(`Hay ${item.quantity} unidad del producto ${pid} agregada en Carrito `)
-        return {status: "Success", message: "se agregaron productos al carrito", producto: nuevoitem}
+        return {status: "success", message: "se agregaron productos al carrito", producto: nuevoitem}
       }
       else{
         return{status: "failed", message: "PRODUCTO INEXISTENTE EN BASE DE DATOS"}
       }
-
     }
-
-    console.log(added)
 
     if (added === "aumentar cantidad") {
       const productToUpdate = parseCart.find(e => e.products.find(prod => prod.productid === pid));
@@ -80,9 +77,19 @@ export default class CartManager {
       const remplazo = nuevoJson.concat(objRemplazo);
       await fs.writeFile(cartRoute, JSON.stringify(remplazo));
       console.log(`Hay ${final.quantity} unidades del producto ${pid} en Carrito `)
-      return {status: "Success", message: "se agregaron productos al carrito", producto: objRemplazo}};
-
+      return {status: "success", message: "se agregaron productos al carrito", producto: objRemplazo}}
+      
+    else{
+        return {status: "failed", message: "Algo salió mal y no sabemos bien que"}}
+    } 
+    catch(err){
+      return {status: "failed", message: err.message}
     }
+
+  }
+    
+    
+  
 
      async founded(id) {
       const produ = JSON.parse(await fs.readFile(productsRoute, "utf-8"));
@@ -109,9 +116,8 @@ export default class CartManager {
       }
     }
 
-  }
+}
 
-  
 
 
 const carro = new CartManager()

@@ -22,15 +22,6 @@ const pid = req.params.pid;
 const cid = req.params.cid
 
 const producto = res.send(await carro.addCarrito(parseInt(cid),parseInt(pid)));
-
-if(producto === "producto inexistente"){
-    res.status(404).send(producto);
-} if (producto === "numero incrementado en Carrito"){
-    res.status(202).send(producto)
-} if (producto === "producto agregado a carrito") {
-    res.status(200).send(producto)
-}
-
 })
 
 
