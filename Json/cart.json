@@ -1,0 +1,4 @@
+[
+  { "productId": 3544, "quantity": 1, "cartId": 4343 },
+  { "cartId": 2071, "productId": 3544, "quantity": 1 }
+]
