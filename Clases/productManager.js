@@ -23,12 +23,12 @@ export default class ProductManager {
 
       if (check) {
         console.log("Producto Incompleto");
-        return{status: "failed", message: "Producto Incompleto, faltan completar campos"}
+        return{status: "failed", message: "PRODUCTO INCOMPLETO, FALTAN RELLENAR CAMPOS"}
       }
 
       if (prod) {
         console.log("Producto ya agregado");
-        return{status: "failed", message: "Producto ya agregado"}
+        return{status: "failed", message: "PRODUCTO YA AGREGADO"}
       } else {
         const newProduct = new Product(input.title, input.description, input.price, input.thumbnail, input.code, input.stock, input.status)
         console.log(newProduct)
@@ -38,7 +38,7 @@ export default class ProductManager {
       }
     }
     catch(e){
-      console.error("Error al realizar la operacion", e.message)
+      console.error("ERROR AL REALIZAR OPERACION", e.message)
     }
   }
 
@@ -61,7 +61,7 @@ export default class ProductManager {
     } 
 
     catch(e){
-    console.error("Error al consultar listado", e.message);}
+    console.error("ERROR AL CONSULTAR LISTADO", e.message);}
   }
 
   async getProductById(id) {

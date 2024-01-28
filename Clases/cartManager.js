@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import { _dirname } from "../path.js"
 import Cart from "./cart.js"
-import { ppid } from "process";
+
 
 const cartRoute = `${_dirname}/Json/cart.json`;
 const productsRoute = `${_dirname}/Json/products.json`
@@ -32,10 +32,8 @@ export default class CartManager {
     }
 
   async addCarrito(cid, pid) {
-     //busco si el id ya tiene un carrito creado
+    //busco si el id ya tiene un carrito creado
      const added = await this.isAdded(cid,pid)
-    //busco si existe el el producto en la base de datos de productos
-    const item = await this.founded(pid);
     //dejo a disposición el contenido del cart.json
     const parseCart = JSON.parse(await fs.readFile(cartRoute, "utf-8"));
     const parseProduct = JSON.parse(await fs.readFile(productsRoute, "utf-8"))
@@ -57,7 +55,7 @@ export default class CartManager {
         const remplazo = nuevoJson.concat(nuevoitem);
         await fs.writeFile(cartRoute, JSON.stringify(remplazo));
         console.log(`Hay ${item.quantity} unidad del producto ${pid} agregada en Carrito `)
-        return {status: "success", message: "se agregaron productos al carrito", producto: nuevoitem}
+        return {status: "success", message: "SE AGREGARON PRODUCTOS AL CARRITO EXITOSAMENTE", producto: nuevoitem}
       }
       else{
         return{status: "failed", message: "PRODUCTO INEXISTENTE EN BASE DE DATOS"}
@@ -88,20 +86,7 @@ export default class CartManager {
 
   }
     
-    
-  
-
-     async founded(id) {
-      const produ = JSON.parse(await fs.readFile(productsRoute, "utf-8"));
-      const item = produ.find((e) => e.id === id);
-      if (item) {
-        return item;
-      } else {
-        return null;
-      }
-    }
-  
-    async isAdded(cid, pid){
+  async isAdded(cid, pid){
       const produ = JSON.parse(await fs.readFile(cartRoute, "utf-8"));
       const cart =  produ.some((e) => e.cartId === cid);
       const contenido = produ.find((e) => e.products.find(e => e.productid === pid))

@@ -11,17 +11,14 @@ cartRoute.get("/:cid", async(req, res)=>{
 
 cartRoute.post("/",async (req, res) => {
     const cart = res.send(await carro.createCart());
-    
-    return cart
-    
-    })
+})
 
 
 cartRoute.post("/:cid/product/:pid",async (req, res) => {
-const pid = req.params.pid;
-const cid = req.params.cid
+    const pid = req.params.pid;
+    const cid = req.params.cid
 
-const producto = res.send(await carro.addCarrito(parseInt(cid),parseInt(pid)));
+    const producto = res.send(await carro.addCarrito(parseInt(cid),parseInt(pid)));
 })
 
 

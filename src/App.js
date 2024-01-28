@@ -1,7 +1,3 @@
-import ProductManager from "../Clases/productManager.js";
-import CartManager from "../Clases/cartManager.js";
-import { promises as fs } from "fs";
-
 import cartRoute from "./routes/cart.routes.js";
 import prodRoute from "./routes/products.routes.js";
 
@@ -10,9 +6,6 @@ import prodRoute from "./routes/products.routes.js";
 import express from "express";
 
 const PORT = 8080;
-
-
-
 const app = express()
 
 app.use(express.json())
@@ -39,6 +32,30 @@ app.use("/api/cart", cartRoute)
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////TESTINNG////////////////////////////////////////
 
+// PRODUCTS
+
+//GET http://localhost:8080/api/products/  --> listado de todos los productos
+//GET http://localhost:8080/api/products?limit=# --> Listado de productos con limite de registros
+//GET http://localhost:8080/api/products/:pid --> Devuelve aquel producto que coincida con el ID
+//POST http://localhost:8080/api/products/ --> volcando un producto en el body lo agrega a la BD, el método solo valida que no haya campos nullish
+
+//Dummy JSON
+/* {
+  "title": "Batatas Fritas",
+  "description": "Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.",
+  "price": 33824,
+  "thumbnail": "/et/ultrices/posuere/cubilia/curae/donec.json",
+  "code": "MA8755",
+  "stock": 286,
+  "status": true
+} */
+
+// CART
+
+// POST http://localhost:8080/api/cart/ 
+// GET  http://localhost:8080/api/cart/:cartId
+// POST http://localhost:8080/api/cart/:cartId/product/:productId
 
 

@@ -4,9 +4,7 @@ export default class Cart{
         this.products = []
     }
 
-    static agregarId(){
-       
+    static agregarId(){ 
         return(Math.trunc(Math.random()*(5000 - 1)+1))
     }
-    
 }
