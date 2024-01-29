@@ -21,6 +21,10 @@ cartRoute.post("/:cid/product/:pid",async (req, res) => {
     const producto = res.send(await carro.addCarrito(parseInt(cid),parseInt(pid)));
 })
 
+cartRoute.delete("/:cid", async(req, res)=>{
+    const cid = req.params.cid
+    res.send(await carro.deleteCart(cid))
+})
 
 
 export default cartRoute

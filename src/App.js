@@ -39,7 +39,10 @@ app.use("/api/cart", cartRoute)
 //GET http://localhost:8080/api/products/  --> listado de todos los productos
 //GET http://localhost:8080/api/products?limit=# --> Listado de productos con limite de registros
 //GET http://localhost:8080/api/products/:pid --> Devuelve aquel producto que coincida con el ID
-//POST http://localhost:8080/api/products/ --> volcando un producto en el body lo agrega a la BD, el método solo valida que no haya campos nullish
+//DELETE http://localhost:8080/api/products/:pid ---> borra item de la base de datos
+//PUT  http://localhost:8080/api/products/:pid ---> modifica el producto de la base de datos
+//POST http://localhost:8080/api/products/ --> volcando un producto en el body lo agrega a la BD, el método solo valida que no haya campos nullishv y que el codigo de producto no este repetido
+
 
 //Dummy JSON
 /* {
@@ -57,5 +60,5 @@ app.use("/api/cart", cartRoute)
 // POST http://localhost:8080/api/cart/ --> Crea un carrito nuevo
 // GET  http://localhost:8080/api/cart/:cartId --> Devuelve contenido de carrito según ID
 // POST http://localhost:8080/api/cart/:cartId/product/:productId --> Agrega productos al carrito de acuerdo al Id de carrito y producto a agregar.
-
+// DELETE http://localhost:8080/api/cart/:cartId --> borra el carrito de la base de datos
 

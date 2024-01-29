@@ -101,6 +101,59 @@ export default class CartManager {
       }
     }
 
+    async deleteProduct(id) {
+    const ID = parseInt(id)
+    const producto = JSON.parse(await fs.readFile(this.ruta, "utf-8"));
+    const produ = producto.find((prod) => prod.id === ID);
+
+    try{
+      if (produ) {
+        console.log(`EL SIGUIENTE PRODUCTO HA SIDO ELIMINADO CON EXITO`);
+        console.log(produ);
+        await fs.writeFile(
+          this.ruta,
+          JSON.stringify(producto.filter((prod) => prod.id != id))
+        )
+        return {status: "success", msg: "PRODUCTO ELIMINADO CON EXITO", item: {produ} }
+        
+      } else {
+        return {status: "failed", msg: "PRODUCTO NO ENCONTRADO" };
+      }
+    }
+
+    catch(e){
+      console.error("Error al realizar la operacion", e.message)
+    }
+  }
+
+  async deleteCart(id) {
+    const ID = parseInt(id)
+    const parseCart = JSON.parse(await fs.readFile(cartRoute, "utf-8"));
+    const produ = parseCart.find((prod) => prod.cartId === ID);
+
+
+
+    try{
+      if (produ) {
+        console.log(`EL SIGUIENTE CARRITO HA SIDO ELIMINADO CON EXITO`);
+        console.log(produ);
+        await fs.writeFile(
+          cartRoute,
+          JSON.stringify(parseCart.filter((prod) => prod.id != id))
+        )
+        return {status: "success", msg: "CARRITO ELIMINADO CON EXITO", item: {produ} }
+        
+      } else {
+        return {status: "failed", msg: "CARRITO NO ENCONTRADO" };
+      }
+    }
+
+    catch(e){
+      console.error("Error al realizar la operacion", e.message)
+    }
+  }
+
+
 }
 
 
